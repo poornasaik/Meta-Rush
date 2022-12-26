@@ -19,7 +19,7 @@ import java.io.ObjectOutputStream;
 public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 7820846447883914036L;
-
+	private static final String dataLoc = ".data/.mrload";
 	public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
 	private Thread thread;
 	private boolean running = false;
@@ -170,8 +170,8 @@ public class Game extends Canvas implements Runnable {
 		new Game();
 	}
 	
-public static void saveData(ProgressSave ps) {	
-		try(FileOutputStream fs = new FileOutputStream("data/gs.raw")){
+	public static void saveData(ProgressSave ps) {	
+		try(FileOutputStream fs = new FileOutputStream(dataLoc)){
 			ObjectOutputStream os = new ObjectOutputStream(fs);
 			os.writeObject(ps);
 			os.close();
@@ -187,10 +187,17 @@ public static void saveData(ProgressSave ps) {
 	
 	public static ProgressSave loadData() {
 		ProgressSave ps=null;
-		try(FileInputStream fi = new FileInputStream("data/gs.raw")){
+		try(FileInputStream fi = new FileInputStream(dataLoc)){
 			ObjectInputStream oi = new ObjectInputStream(fi);
 			ps= (ProgressSave)oi.readObject();
 		} catch (FileNotFoundException e1) {
+			try {
+				File file = new File(dataLoc);
+				file.getParentFile().mkdirs(); 
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

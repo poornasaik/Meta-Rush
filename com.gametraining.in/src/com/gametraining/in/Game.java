@@ -171,7 +171,7 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 public static void saveData(ProgressSave ps) {	
-		try(FileOutputStream fs = new FileOutputStream("gs.raw")){
+		try(FileOutputStream fs = new FileOutputStream("data/gs.raw")){
 			ObjectOutputStream os = new ObjectOutputStream(fs);
 			os.writeObject(ps);
 			os.close();
@@ -187,11 +187,10 @@ public static void saveData(ProgressSave ps) {
 	
 	public static ProgressSave loadData() {
 		ProgressSave ps=null;
-		try(FileInputStream fi = new FileInputStream("gs.raw")){
+		try(FileInputStream fi = new FileInputStream("data/gs.raw")){
 			ObjectInputStream oi = new ObjectInputStream(fi);
 			ps= (ProgressSave)oi.readObject();
 		} catch (FileNotFoundException e1) {
-			System.out.println("Previous Game Data is not available");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

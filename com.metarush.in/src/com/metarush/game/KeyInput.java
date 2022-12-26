@@ -3,6 +3,8 @@ package com.metarush.game;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import com.metarush.game.Game.STATE;
+
 public class KeyInput extends KeyAdapter {
 
 	private boolean uP = false;
@@ -41,8 +43,14 @@ public class KeyInput extends KeyAdapter {
 					tempObject.setVelX(5);
 				}
 			}
-			if (key == KeyEvent.VK_P) {
+			if (key == KeyEvent.VK_P||key ==KeyEvent.VK_ESCAPE) {
 				Game.pause = !Game.pause;
+			}
+			if (Game.pause &&key == KeyEvent.VK_Q) {
+				Game.setGameState(STATE.End);
+				handler.init();
+				AudioPlayer.stopMusic();
+				AudioPlayer.playMusic("Menu",-1);
 			}
 		}
 

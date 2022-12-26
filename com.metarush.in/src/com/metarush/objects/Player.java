@@ -12,7 +12,6 @@ import com.metarush.game.GameObject;
 import com.metarush.game.HUD;
 import com.metarush.game.Handler;
 import com.metarush.game.ID;
-import com.metarush.game.Trail;
 
 public class Player extends GameObject {
 
@@ -72,9 +71,15 @@ public class Player extends GameObject {
 	private boolean collision() {
 		for (int i = 0; i < handler.enemyObject.size(); i++) {
 			GameObject tempObject = handler.enemyObject.get(i);
-			if (getBounds().intersects(tempObject.getBounds())) {
-				HUD.HEALTH -= 100;
+			boolean intersect = getBounds().intersects(tempObject.getBounds());
+			if (intersect) {
+				if(!tempObject.isPrevCollidedPlayer()) {
+					HUD.HEALTH -= tempObject.getDamage();
+					tempObject.setCollidingPlayer(true);
+				}
 				return true;
+			}else{
+				tempObject.setCollidingPlayer(false);
 			}
 
 		}
@@ -91,6 +96,10 @@ public class Player extends GameObject {
 		g.setColor(Color.LIGHT_GRAY);
 		// g.fillOval((int)x + 2,(int) y+2, 28, 28);
 		Toolkit.getDefaultToolkit().sync();
+	}
+	@Override
+	public float getDamage() {
+		return 0;
 	}
 
 }

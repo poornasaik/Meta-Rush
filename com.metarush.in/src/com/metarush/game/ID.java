@@ -8,5 +8,6 @@ public enum ID {
 	FastEnemy(),
 	SmartEnemy(),
 	BossEnemy(),
-	MenuParticles();
+	MenuParticles(),
+	EnemyAnimation(), Money;
 }

@@ -9,7 +9,6 @@ import com.metarush.game.Game;
 import com.metarush.game.GameObject;
 import com.metarush.game.Handler;
 import com.metarush.game.ID;
-import com.metarush.game.Trail;
 
 public class FastEnemy extends GameObject {
 	int speed;
@@ -38,9 +37,12 @@ public class FastEnemy extends GameObject {
 		g.fillOval((int)x, (int)y, 20, 20);
 		Toolkit.getDefaultToolkit().sync();
 	}
-
+	@Override
 	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, 20, 20);
 	}
-
+	@Override
+	public float getDamage() {
+		return 12f;
+	}
 }

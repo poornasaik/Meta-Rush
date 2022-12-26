@@ -6,14 +6,13 @@ import com.metarush.objects.BasicEnemy;
 import com.metarush.objects.BossEnemy;
 import com.metarush.objects.FastEnemy;
 import com.metarush.objects.SmartEnemy;
+import com.metarush.objects.Utilities;
 
 public class Spawner {
 
 	private Handler handler;
 	private HUD hud;
-
-
-	static int scoreKeep = 0;
+	static int levelAdder=1;
 	private Random r = new Random();
 
 	public Spawner(Handler handler, HUD hud) {
@@ -23,9 +22,8 @@ public class Spawner {
 	}
 
 	public void tick() {
-		scoreKeep++;
-		if (scoreKeep > 500&&HUD.HEALTH>0) {
-			scoreKeep = 0;
+		if (HUD.HEALTH>0&&Utilities.getSeconds(hud.getInitTime())/30>levelAdder) {
+			levelAdder++;
 			if (hud.getLevel() <= 15) {
 				hud.setLevel(hud.getLevel() + 1);
 			}

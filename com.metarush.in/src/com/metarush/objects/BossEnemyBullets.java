@@ -10,7 +10,6 @@ import com.metarush.game.Game;
 import com.metarush.game.GameObject;
 import com.metarush.game.Handler;
 import com.metarush.game.ID;
-import com.metarush.game.Trail;
 
 public class BossEnemyBullets extends GameObject {
 	Random r = new Random();
@@ -49,6 +48,10 @@ public class BossEnemyBullets extends GameObject {
 
 	public Rectangle getBounds() {
 		return new Rectangle((int)x,(int) y, 16, 16);
+	}
+	@Override
+	public float getDamage() {
+		return 9.5f;
 	}
 
 }

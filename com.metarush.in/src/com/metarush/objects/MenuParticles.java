@@ -10,7 +10,6 @@ import com.metarush.game.Game;
 import com.metarush.game.GameObject;
 import com.metarush.game.Handler;
 import com.metarush.game.ID;
-import com.metarush.game.Trail;
 
 public class MenuParticles extends GameObject {
 	Random r = new Random();
@@ -50,6 +49,12 @@ public class MenuParticles extends GameObject {
 
 	public Rectangle getBounds() {
 		return null;
+	}
+
+	@Override
+	public float getDamage() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
